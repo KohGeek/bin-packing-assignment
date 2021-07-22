@@ -1,4 +1,4 @@
-package NextFit;
+ package NextFit;
 
 import java.util.Scanner;
 
@@ -75,3 +75,4 @@ public class NextFit
 	}
 	
 }
+
