@@ -1,5 +1,3 @@
-package main;
-
 import java.util.Scanner;
 
 public class Ff 
@@ -28,17 +26,18 @@ public class Ff
 						break;
 					}
 				}
-
 				// If no bin could accommodate weight[i]
 				if (j == res)
 				{
 					bin_rem[res] = c - weight[i];
 					res++;
 				}
+										
 			}
 			return res;
 		}
-
+		
+	
 		// Driver program
 		public static void main(String[] args)
 		{
@@ -47,12 +46,20 @@ public class Ff
 			int a = scan.nextInt();
 			int weight[] = new int[a];
 			for(int i = 0; i < a; i++)
+			{
+				System.out.print("Their each size: ");
 				weight[i] = scan.nextInt();
+			}
+				
 			System.out.print("How many items for each container?: ");
 			int c = scan.nextInt();
 			int n = weight.length;
 			System.out.print("Number of bins required in First Fit : "
 							+ firstFit(weight, n, c));
+			System.out.println();
+			
+			
+			
 		}
 
 }
