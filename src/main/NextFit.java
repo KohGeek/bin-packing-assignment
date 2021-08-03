@@ -1,4 +1,4 @@
-package NextFit;
+package main;
 
 import java.util.Scanner;
 
