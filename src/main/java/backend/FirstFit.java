@@ -1,8 +1,10 @@
-package main;
+package backend;
 
 import java.util.Scanner;
 
-public class Ff 
+import handler.BinPacking;
+
+public class FirstFit implements BinPacking
 {
 	// Returns number of bins required using first fit
 		static int firstFit(int weight[], int n, int c)
