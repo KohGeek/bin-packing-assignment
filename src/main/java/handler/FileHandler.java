@@ -23,7 +23,7 @@ public class FileHandler {
             for (Bin bin : bins) {
                 var it = bin.getItemList().iterator();
                 while (it.hasNext()) {
-                    writer.write(it.next());
+                    writer.write(it.next().toString());
                     writer.write(" ");
                 }
                 writer.write("\n");
@@ -33,17 +33,23 @@ public class FileHandler {
 
     public List<Integer> readFile(File inputFile, int capacity)
         throws FileNotFoundException {
-        var items = new LinkedList<>();
+        List<Integer> items = new LinkedList<>();
 
         try (var sc = new Scanner(inputFile);) {
             while (sc.hasNextLine()) {
-                var item = Integer.parseInt(sc.nextLine());
-                if (item <= capacity && item >= 1) {
-                    items.add(item);
+                try {
+                    var item = Integer.parseInt(sc.nextLine());
+                    if (item <= capacity && item >= 1) {
+                        items.add(item);
+                    } else {
+                        System.out.println("Numbers out of bounds, skipping line.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Non-integer detected, skipping line.");
                 }
             }
-        }
+        } 
 
-        return new LinkedList<>();
+        return items;
     }
 }

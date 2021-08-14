@@ -21,8 +21,8 @@ public class Controller implements Callable<Integer> {
 
     FileHandler fh = new FileHandler();
 
-    BinPackingAlgorithm ff = new FirstFit(binCapacity);
-    BinPackingAlgorithm ffd = new FirstFitDescending(binCapacity);
+    BinPackingAlgorithm ff;
+    BinPackingAlgorithm ffd;
 
     public Controller(
         File file,
@@ -42,6 +42,9 @@ public class Controller implements Callable<Integer> {
     public Integer call() throws Exception {
         Collection<Bin> bins;
 
+        ff = new FirstFit(binCapacity);
+        ffd = new FirstFitDescending(binCapacity);
+
         if (isRandomlyGenerated) {
             for (var i = 0; i < noOfRandomItems; i++) items.add(
                 rand.nextInt(binCapacity - 1) + 1
@@ -56,7 +59,7 @@ public class Controller implements Callable<Integer> {
 
         ffd.pack(items);
         bins = ffd.getPackedBins();
-        fh.writeFile(outputFileName, ff.getAlgoName(), bins);
+        fh.writeFile(outputFileName, ffd.getAlgoName(), bins);
 
         return 0;
     }

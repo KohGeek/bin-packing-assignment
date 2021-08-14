@@ -12,11 +12,12 @@ public class FirstFitDescending extends BinPackingAlgorithm {
     public FirstFitDescending(int capacity) {
         super(capacity);
         this.algorithmName = "ffd";
+        bins = new LinkedList<>();
     }
 
     @Override
     public void pack(List<Integer> items) {
-        Collections.sort(items);
+        Collections.sort(items, Collections.reverseOrder());
 
         for (Integer integer : items) {
             var it = bins.iterator();
