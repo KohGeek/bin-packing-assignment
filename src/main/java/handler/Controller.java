@@ -24,6 +24,7 @@ public class Controller implements Callable<Integer> {
     BinPackingAlgorithm ff;
     BinPackingAlgorithm ffd;
 
+    // constructor, looks weird cause formatted by prettier
     public Controller(
         File file,
         int number,
@@ -38,6 +39,20 @@ public class Controller implements Callable<Integer> {
         this.isRandomlyGenerated = isRandomlyGenerated;
     }
 
+    // Prints what is written to the file, to the console
+    public void logToConsole(String algoName, Collection<Bin> bins) {
+        System.out.println("\n---" + algoName + "---");
+        for (Bin bin : bins) {
+            var it = bin.getItemList().iterator();
+            while (it.hasNext()) {
+                System.out.print(it.next().toString());
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+    }
+
+    // runner calls this method
     @Override
     public Integer call() throws Exception {
         Collection<Bin> bins;
@@ -45,22 +60,43 @@ public class Controller implements Callable<Integer> {
         ff = new FirstFit(binCapacity);
         ffd = new FirstFitDescending(binCapacity);
 
+        // if isRandomlyGenerated, then generated specified amount of random items
         if (isRandomlyGenerated) {
-            for (var i = 0; i < noOfRandomItems; i++) items.add(
-                rand.nextInt(binCapacity - 1) + 1
-            );
+            for (var i = 0; i < noOfRandomItems; i++) items.add(rand.nextInt(binCapacity - 1) + 1);
+            System.out.println(noOfRandomItems + " has been generated.");
+        // otherwise read from file
         } else {
             items = fh.readFile(inputFile, binCapacity);
+            System.out.println(inputFile.getName() + " has been read.");
         }
 
+        // Print out the read items/generated items into 5 columns
+        var newline = 0;
+        for (Integer item : items) {
+            if (newline > 4) {
+                System.out.println();
+                newline = 0;
+            }
+            System.out.print(item + "\t");
+            newline++;
+        }
+        System.out.println();
+        
+        // The following two modules are the same
+        // 1. Pack the item list
+        // 2. Get the packed bins
+        // 3. Write the bins to the output file
         ff.pack(items);
         bins = ff.getPackedBins();
+        logToConsole(ff.getAlgoName(), bins);
         fh.writeFile(outputFileName, ff.getAlgoName(), bins);
 
         ffd.pack(items);
         bins = ffd.getPackedBins();
+        logToConsole(ffd.getAlgoName(), bins);
         fh.writeFile(outputFileName, ffd.getAlgoName(), bins);
 
         return 0;
     }
+
 }

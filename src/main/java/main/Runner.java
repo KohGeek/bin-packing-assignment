@@ -2,7 +2,6 @@ package main;
 
 import handler.Controller;
 import java.io.File;
-import java.util.Random;
 import java.util.concurrent.Callable;
 import picocli.CommandLine;
 import picocli.CommandLine.ArgGroup;
@@ -19,6 +18,7 @@ import picocli.CommandLine.Spec;
 )
 public class Runner implements Callable<Integer> {
 
+    // Specifies the options in the following class as mutually exclusive
     @ArgGroup(exclusive = true, multiplicity = "1")
     Input input;
 
@@ -63,28 +63,22 @@ public class Runner implements Callable<Integer> {
     @Spec
     CommandSpec spec;
 
-    Random rand = new Random();
-
     @Override
     public Integer call() throws Exception {
         var cl = spec.commandLine();
-        boolean isRandomlyGenerated = cl
-            .getParseResult()
-            .hasMatchedOption("--random");
+        boolean isRandomlyGenerated = cl.getParseResult().hasMatchedOption("--random");
         File file = null;
 
+        // If -c is less than 1, throw an exception
         if (capacity < 1) {
-            throw new ParameterException(
-                cl,
-                "Bin capacity must not be less than 1."
-            );
+            throw new ParameterException(cl, "Bin capacity must not be less than 1.");
         }
 
+        // If -r is less than 1, throw an exception
         if (isRandomlyGenerated && input.getNumberOfItems() < 1) {
-            throw new ParameterException(
-                cl,
-                "Number of generated items must not be less than 1."
-            );
+            throw new ParameterException(cl, "Number of generated items must not be less than 1.");
+        // Otherwise, check for file existence
+        // The check is done here to utilise picocli built in exception handler
         } else if (!isRandomlyGenerated) {
             file = new File(input.getInputFileName());
             if (!file.exists()) {

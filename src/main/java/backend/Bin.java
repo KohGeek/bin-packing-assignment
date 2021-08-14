@@ -10,15 +10,15 @@ public class Bin {
     private int capacity;
 
     // add items and checks if it's over-capacity
-    // returns true and adds item if it fits
-    // returns false and ignores item if it doesn't
-    public boolean addItem(int item) {
-        if (filled + item < capacity) {
+    // if it fits, add item and return remaining capacity
+    // if it doesn't, ignores item and return the needed extra capacity in negative
+    public int addItem(int item) {
+        if (filled + item <= capacity) {
             this.items.add(item);
             filled += item;
-            return true;
+            return capacity - filled;
         } else {
-            return false;
+            return capacity - (filled + item);
         }
     }
 
