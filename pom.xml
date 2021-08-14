@@ -2,14 +2,23 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.bucky</groupId>
   <artifactId>bin-packing-assignment</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>Bin Packing Assignment</name>
+  <build>
+  <pluginManagement>
+   <plugins>
+    <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>          
+        <configuration>
+            <source>15</source>
+            <target>15</target>
+        </configuration>
+    </plugin>
+   </plugins>
+  </pluginManagement>
+ </build>
   <dependencies>
-    <dependency>
-      <groupId>com.opencsv</groupId>
-      <artifactId>opencsv</artifactId>
-      <version>5.5.1</version>
-    </dependency>
     <dependency>
       <groupId>info.picocli</groupId>
       <artifactId>picocli</artifactId>

@@ -1,67 +1,41 @@
-import java.io.File;
-import java.io.FileWriter;
-import java.util.ArrayList;
+package backend;
+
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
 
-import handler.BinPacking;
+public class FirstFitDescending extends BinPackingAlgorithm {
 
-public class FirstFitDescending implements BinPacking {
+    LinkedList<Integer> items = new LinkedList<>();
 
-    public static void main(String[] args) throws Exception {
+    public FirstFitDescending(int capacity) {
+        super(capacity);
+        this.algorithmName = "ffd";
+    }
 
-        Float binCapacity = Float.parseFloat(args[0]);
-        Scanner readFile = new Scanner(new File(args[1]));
+    @Override
+    public void pack(List<Integer> items) {
+        Collections.sort(items);
 
-        ArrayList<Float> items = new ArrayList<>();
-        ArrayList<Bin> bins = new ArrayList<>();
-
-        // this is a first-fit descending algorithm, thus all data is read first
-        while (readFile.hasNext()) {
-            items.add(Float.parseFloat(readFile.next()));
+        for (Integer integer : items) {
+            var it = bins.iterator();
+            firstFit(integer, it);
         }
+    }
 
-        // then sorted
-        Collections.sort(items, Collections.reverseOrder());
-        readFile.close();
-        bins.add(new Bin(items.get(0), binCapacity));
-
-        // Following code is a bit ugly due to overuse of breaks
-        // How it work:
-        // 1. For every item, step through the bins
-        // 2. If it fits in the bin, jump to the next object
-        // 3. If it stepped through every bin, and still fail to fit the item, make a
-        // new bin
-        // 4. Repeat until all items are stepped through
-        for (int i = 1; i < items.size(); i++) {
-            Float item = items.get(i);
-            for (int j = 0; j <= bins.size(); j++) {
-                if (bins.get(j).addItem(item)) {
-                    break;
-                } else if (j == bins.size() - 1) {
-                    bins.add(new Bin(item, binCapacity));
-                    break;
-                }
-            }
+    // First Fit Algorithm
+    // 1. Step through the bin and try to fit the tiem
+    // 2. If it fits in the bin, exit loop
+    // 3. If it stepped through every bin, and still fail to fit the item, make a
+    // new bin
+    private void firstFit(int item, Iterator<Bin> it) {
+        var isFit = false;
+        while (it.hasNext() && !isFit) {
+            isFit = it.next().addItem(item);
         }
-
-        // Write the data into a file, specified here
-        try (FileWriter writer = new FileWriter("output.txt")) {
-            for (Bin bin : bins) {
-                List<Float> temp = new LinkedList<>();
-                temp = bin.getItemList();
-
-                for (Float f : temp) {
-                    writer.write(String.valueOf(f) + " ");
-                }
-
-                writer.write("\n");
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!isFit) {
+            bins.add(new Bin(item, binCapacity));
         }
-
     }
 }

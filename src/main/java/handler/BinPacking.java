@@ -1,16 +1,13 @@
 package handler;
 
-import java.util.Collection;
-
 import backend.Bin;
+import java.util.Collection;
+import java.util.List;
 
 public interface BinPacking {
-
-    public void setCapacity(int capacity);
-    public int getCapacity();
-
-    public void pack(String filename);
+    public void pack(List<Integer> items);
 
     public int getNumberOfBins();
+
     public Collection<Bin> getPackedBins();
 }
