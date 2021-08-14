@@ -9,5 +9,7 @@ public interface BinPacking {
 
     public int getNumberOfBins();
 
+    public int getBinCapacity();
+
     public Collection<Bin> getPackedBins();
 }

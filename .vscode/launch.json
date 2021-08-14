@@ -9,7 +9,7 @@
       "name": "Launch Current File",
       "request": "launch",
       "mainClass": "${file}",
-      "args": "-i=input.txt -c=1000"
+      "args": "-r=2000 -c=300 -m=100"
     }
   ]
 }

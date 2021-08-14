@@ -22,7 +22,7 @@
         <configuration>
           <programs>
             <program>
-              <mainClass>com.mycompany.app.App</mainClass>
+              <mainClass>com.bucky</mainClass>
               <id>app</id>
             </program>
           </programs>

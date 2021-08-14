@@ -14,6 +14,7 @@ public class Controller implements Callable<Integer> {
     private int noOfRandomItems;
     private String outputFileName;
     private int binCapacity;
+    private int maxRandom;
     private boolean isRandomlyGenerated;
     List<Integer> items = new LinkedList<>();
 
@@ -30,12 +31,14 @@ public class Controller implements Callable<Integer> {
         int number,
         String outputFile,
         int capacity,
+        int maxRandom,
         boolean isRandomlyGenerated
     ) {
         this.inputFile = file;
         this.noOfRandomItems = number;
         this.outputFileName = outputFile;
         this.binCapacity = capacity;
+        this.maxRandom = maxRandom;
         this.isRandomlyGenerated = isRandomlyGenerated;
     }
 
@@ -56,13 +59,14 @@ public class Controller implements Callable<Integer> {
     @Override
     public Integer call() throws Exception {
         Collection<Bin> bins;
+        String name;
 
         ff = new FirstFit(binCapacity);
         ffd = new FirstFitDescending(binCapacity);
 
         // if isRandomlyGenerated, then generated specified amount of random items
         if (isRandomlyGenerated) {
-            for (var i = 0; i < noOfRandomItems; i++) items.add(rand.nextInt(binCapacity - 1) + 1);
+            for (var i = 0; i < noOfRandomItems; i++) items.add(rand.nextInt(maxRandom) + 1);
             System.out.println(noOfRandomItems + " has been generated.");
         // otherwise read from file
         } else {
@@ -88,13 +92,20 @@ public class Controller implements Callable<Integer> {
         // 3. Write the bins to the output file
         ff.pack(items);
         bins = ff.getPackedBins();
-        logToConsole(ff.getAlgoName(), bins);
-        fh.writeFile(outputFileName, ff.getAlgoName(), bins);
+        name = ff.getAlgoName() + "-" + ff.getBinCapacity();
+        logToConsole(name, bins);
+        fh.writeFile(outputFileName, name, bins);
 
         ffd.pack(items);
         bins = ffd.getPackedBins();
-        logToConsole(ffd.getAlgoName(), bins);
-        fh.writeFile(outputFileName, ffd.getAlgoName(), bins);
+        name = ffd.getAlgoName() + "-" + ffd.getBinCapacity();
+        logToConsole(name, bins); 
+        fh.writeFile(outputFileName, name, bins);
+
+        System.out.println();
+
+        System.out.println(ff.getAlgoName() + " uses " + ff.getNumberOfBins() + " bins");
+        System.out.println(ffd.getAlgoName() + " uses " + ffd.getNumberOfBins() + " bins");
 
         return 0;
     }

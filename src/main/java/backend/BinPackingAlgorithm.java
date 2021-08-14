@@ -24,6 +24,10 @@ public abstract class BinPackingAlgorithm implements BinPacking {
         return bins;
     }
 
+    public int getBinCapacity() {
+        return binCapacity;
+    }
+
     public String getAlgoName() {
         return algorithmName;
     }
