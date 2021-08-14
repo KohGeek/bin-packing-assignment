@@ -15,6 +15,19 @@
             <target>15</target>
         </configuration>
     </plugin>
+    <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.10</version>
+        <configuration>
+          <programs>
+            <program>
+              <mainClass>com.mycompany.app.App</mainClass>
+              <id>app</id>
+            </program>
+          </programs>
+        </configuration>
+      </plugin>
    </plugins>
   </pluginManagement>
  </build>
