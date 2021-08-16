@@ -23,7 +23,7 @@
           <programs>
             <program>
               <mainClass>com.bucky</mainClass>
-              <id>app</id>
+              <id>bin-packing-assignment</id>
             </program>
           </programs>
         </configuration>
