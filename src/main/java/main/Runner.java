@@ -22,30 +22,6 @@ public class Runner implements Callable<Integer> {
     @ArgGroup(exclusive = true, multiplicity = "1")
     Input input;
 
-    static class Input {
-
-        @Option(
-            names = { "-i", "--input" },
-            description = "Specify input file name for the items. Mutally exclusive with -r."
-        )
-        private String inputFile;
-
-        @Option(
-            names = { "-r", "--random" },
-            description = "Randomly generates a specified number of items. Mutually exclusive with -i.",
-            defaultValue = "-1"
-        )
-        private int number;
-
-        public int getNumberOfItems() {
-            return number;
-        }
-
-        public String getInputFileName() {
-            return inputFile;
-        }
-    }
-
     @Option(
         names = { "-o", "--output" },
         description = "Specify the prepend for the output file name. Default prepend is `output`, which to output-<algo>-<capacity>.txt.",
@@ -68,7 +44,7 @@ public class Runner implements Callable<Integer> {
     private int maxRandom = 5;
 
     @Spec
-    CommandSpec spec;
+    private CommandSpec spec;
 
     @Override
     public Integer call() throws Exception {
@@ -113,5 +89,29 @@ public class Runner implements Callable<Integer> {
         var commandLine = new CommandLine(new Runner());
         int exitCode = commandLine.execute(args);
         System.exit(exitCode);
+    }
+}
+
+class Input {
+
+    @Option(
+        names = { "-i", "--input" },
+        description = "Specify input file name for the items. Mutally exclusive with -r."
+    )
+    private String inputFile;
+
+    @Option(
+        names = { "-r", "--random" },
+        description = "Randomly generates a specified number of items. Mutually exclusive with -i.",
+        defaultValue = "-1"
+    )
+    private int number;
+
+    public int getNumberOfItems() {
+        return number;
+    }
+
+    public String getInputFileName() {
+        return inputFile;
     }
 }

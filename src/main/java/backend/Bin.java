@@ -9,16 +9,17 @@ public class Bin {
     private int filled = 0;
     private int capacity;
 
-    // add items and checks if it's over-capacity
-    // if it fits, add item and return remaining capacity
-    // if it doesn't, ignores item and return the needed extra capacity in negative
-    public int addItem(int item) {
+    // checks if it's over-capacity
+    // return remaining capacity if item are added, can be in negative
+    public int checkCapacity(int item) {
+        return capacity - (filled + item);
+    }
+
+    // add items to the bin
+    public void addItem(int item) {
         if (filled + item <= capacity) {
             this.items.add(item);
             filled += item;
-            return capacity - filled;
-        } else {
-            return capacity - (filled + item);
         }
     }
 

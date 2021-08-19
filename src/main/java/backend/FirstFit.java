@@ -29,7 +29,10 @@ public class FirstFit extends BinPackingAlgorithm {
     private void firstFit(int item, Iterator<Bin> it) {
         var isFit = -1;
         while (it.hasNext() && isFit < 0) {
-            isFit = it.next().addItem(item);
+            var bin = it.next();
+            isFit = bin.checkCapacity(item);
+            if (isFit >= 0)
+                bin.addItem(item);
         }
         if (isFit < 0) {
             bins.add(new Bin(item, binCapacity));

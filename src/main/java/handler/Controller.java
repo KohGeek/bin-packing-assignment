@@ -16,14 +16,14 @@ public class Controller implements Callable<Integer> {
     private int binCapacity;
     private int maxRandom;
     private boolean isRandomlyGenerated;
-    List<Integer> items = new LinkedList<>();
+    private List<Integer> items = new LinkedList<>();
 
-    Random rand = new Random();
+    private Random rand = new Random();
 
-    FileHandler fh = new FileHandler();
+    private FileHandler fh = new FileHandler();
 
-    BinPackingAlgorithm ff;
-    BinPackingAlgorithm ffd;
+    private BinPackingAlgorithm ff;
+    private BinPackingAlgorithm ffd;
 
     // constructor, looks weird cause formatted by prettier
     public Controller(
