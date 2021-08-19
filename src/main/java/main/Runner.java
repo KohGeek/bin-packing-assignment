@@ -20,7 +20,7 @@ public class Runner implements Callable<Integer> {
 
     // Specifies the options in the following class as mutually exclusive
     @ArgGroup(exclusive = true, multiplicity = "1")
-    Input input;
+    private Input input;
 
     @Option(
         names = { "-o", "--output" },
