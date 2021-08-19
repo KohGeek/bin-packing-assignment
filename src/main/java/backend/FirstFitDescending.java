@@ -26,10 +26,10 @@ public class FirstFitDescending extends BinPackingAlgorithm {
     }
 
     // First Fit Algorithm
-    // 1. Step through the bin and try to fit the tiem
-    // 2. If it fits in the bin, exit loop
-    // 3. If it stepped through every bin, and still fail to fit the item, make a
-    // new bin
+    // 1. Check if there is a next bin, if not, add a new bin and call it a day
+    // 2. Else, check if it fits in the bin
+    // 3. If it fits, add it to the bin
+    // 4. Else, go to the next bin
     private void firstFit(int item, Iterator<Bin> binIterator) {
         var added = false;
         while (!added) {

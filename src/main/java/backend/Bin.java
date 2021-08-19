@@ -20,6 +20,8 @@ public class Bin {
         if (filled + item <= capacity) {
             this.items.add(item);
             filled += item;
+        } else {
+            throw new IllegalArgumentException("Bin is full");
         }
     }
 
