@@ -16,8 +16,8 @@ public class FirstFit extends BinPackingAlgorithm {
     public void pack(List<Integer> items) {
         for (Integer integer : items) {
             // Resets iterator instance, starts from the first bin
-            var it = bins.iterator();
-            firstFit(integer, it);
+            var binIterator = bins.iterator();
+            firstFit(integer, binIterator);
         }
     }
 
@@ -26,16 +26,21 @@ public class FirstFit extends BinPackingAlgorithm {
     // 2. If it fits in the bin, exit loop
     // 3. If it stepped through every bin, and still fail to fit the item, make a
     // new bin
-    private void firstFit(int item, Iterator<Bin> it) {
+    private void firstFit(int item, Iterator<Bin> binIterator) {
+        var added = false;
         var isFit = -1;
-        while (it.hasNext() && isFit < 0) {
-            var bin = it.next();
-            isFit = bin.checkCapacity(item);
-            if (isFit >= 0)
-                bin.addItem(item);
-        }
-        if (isFit < 0) {
-            bins.add(new Bin(item, binCapacity));
+        while (!added) {
+            if (!binIterator.hasNext()) {
+                bins.add(new Bin(item, binCapacity));
+                added = true;
+            } else {
+                var bin = binIterator.next();
+                isFit = bin.checkCapacity(item);
+                if (isFit >= 0) {
+                    bin.addItem(item);
+                    added = true;
+                }
+            } 
         }
     }
 }
