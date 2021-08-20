@@ -1,9 +1,9 @@
 package backend;
 
-import handler.BinPacking;
 import java.util.Collection;
+import java.util.List;
 
-public abstract class BinPackingAlgorithm implements BinPacking {
+public abstract class BinPackingAlgorithm {
 
     protected String algorithmName;
     protected int binCapacity;
@@ -20,6 +20,8 @@ public abstract class BinPackingAlgorithm implements BinPacking {
     public Collection<Bin> getPackedBins() {
         return bins;
     }
+
+    public abstract void pack(List<Integer> items);
 
     public int getBinCapacity() {
         return binCapacity;

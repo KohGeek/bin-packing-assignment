@@ -21,7 +21,9 @@ public class Bin {
             this.items.add(item);
             filled += item;
         } else {
-            throw new IllegalArgumentException("Bin is full");
+            // this should never happen, as error checking should be done PRIOR to this stage
+            // reserved solely for debugging, if something goes really wrong
+            throw new IllegalArgumentException("Bin is full.");
         }
     }
 

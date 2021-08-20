@@ -22,9 +22,6 @@ public class Controller implements Callable<Integer> {
 
     private FileHandler fh = new FileHandler();
 
-    private BinPackingAlgorithm ff;
-    private BinPackingAlgorithm ffd;
-
     // constructor, looks weird cause formatted by prettier
     public Controller(
         File file,
@@ -61,8 +58,8 @@ public class Controller implements Callable<Integer> {
         Collection<Bin> bins;
         String name;
 
-        ff = new FirstFit(binCapacity);
-        ffd = new FirstFitDescending(binCapacity);
+        BinPackingAlgorithm ff = new FirstFit(binCapacity);
+        BinPackingAlgorithm ffd = new FirstFitDescending(binCapacity);
 
         // if isRandomlyGenerated, then generated specified amount of random items
         if (isRandomlyGenerated) {

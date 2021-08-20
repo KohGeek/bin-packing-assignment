@@ -7,8 +7,6 @@ import java.util.List;
 
 public class FirstFitDescending extends BinPackingAlgorithm {
 
-    private LinkedList<Integer> items = new LinkedList<>();
-
     public FirstFitDescending(int capacity) {
         super(capacity);
         this.algorithmName = "ffd";
