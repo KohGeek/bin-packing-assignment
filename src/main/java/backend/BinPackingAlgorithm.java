@@ -13,6 +13,8 @@ public abstract class BinPackingAlgorithm {
         this.binCapacity = capacity;
     }
 
+    public abstract void pack(List<Integer> items);
+
     public int getNumberOfBins() {
         return bins.size();
     }
@@ -20,8 +22,6 @@ public abstract class BinPackingAlgorithm {
     public Collection<Bin> getPackedBins() {
         return bins;
     }
-
-    public abstract void pack(List<Integer> items);
 
     public int getBinCapacity() {
         return binCapacity;
