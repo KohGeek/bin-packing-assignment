@@ -1,0 +1,19 @@
+{
+  "overrides": [
+    {
+      "files": "*.java",
+      "options": {
+        "tabWidth": 4,
+        "useTabs": false,
+        "printWidth": 100
+      }
+    },
+    {
+      "files": "*.json",
+      "options": {
+        "tabWidth": 2,
+        "useTabs": false
+      }
+    }
+  ]
+}
