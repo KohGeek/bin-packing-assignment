@@ -13,7 +13,7 @@ import picocli.CommandLine.Spec;
 
 @Command(
     mixinStandardHelpOptions = true,
-    version = "Bin Packing Algorithm v0.0.3-SNAPSHOT",
+    version = "Bin Packing Algorithm v1.0.0",
     description = "Runs the bin-packing-algorithm"
 )
 public class Runner implements Callable<Integer> {
