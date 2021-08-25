@@ -73,7 +73,7 @@ public class Runner implements Callable<Integer> {
         if (maxRandom < 1) {
             throw new ParameterException(cl, "Maximum random number must not be less than 1.");
         } else if (maxRandom > capacity) {
-            throw new ParameterException(cl, "Maximum random number must not be more than bin capacity.")
+            throw new ParameterException(cl, "Maximum random number must not be more than bin capacity.");
         }
 
         var controller = new Controller(
