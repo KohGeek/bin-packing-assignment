@@ -64,7 +64,7 @@ public class Controller implements Callable<Integer> {
         // if isRandomlyGenerated, then generated specified amount of random items
         if (isRandomlyGenerated) {
             for (var i = 0; i < noOfRandomItems; i++) items.add(rand.nextInt(maxRandom) + 1);
-            System.out.println(noOfRandomItems + " has been generated.");
+            System.out.println(items.size() + " item/s has been generated.");
         // otherwise read from file
         } else {
             items = fh.readFile(inputFile, binCapacity);

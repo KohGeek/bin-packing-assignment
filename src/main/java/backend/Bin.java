@@ -34,9 +34,8 @@ public class Bin {
 
     // constructor
     public Bin(int item, int capacity) {
-        this.items.add(item);
-        filled += item;
         this.capacity = capacity;
+        this.addItem(item);
     }
 
     public Bin(int capacity) {
