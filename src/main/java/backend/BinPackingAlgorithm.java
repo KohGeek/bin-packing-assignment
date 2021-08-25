@@ -7,21 +7,12 @@ public abstract class BinPackingAlgorithm {
 
     protected String algorithmName;
     protected int binCapacity;
-    protected Collection<Bin> bins;
-
-    protected BinPackingAlgorithm(int capacity) {
-        this.binCapacity = capacity;
-    }
 
     public abstract void pack(List<Integer> items);
 
-    public int getNumberOfBins() {
-        return bins.size();
-    }
+    public abstract int getNumberOfBins();
 
-    public Collection<Bin> getPackedBins() {
-        return bins;
-    }
+    public abstract Collection<Bin> getPackedBins();
 
     public int getBinCapacity() {
         return binCapacity;

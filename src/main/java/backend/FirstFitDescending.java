@@ -1,16 +1,20 @@
 package backend;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class FirstFitDescending extends BinPackingAlgorithm {
 
+    private Queue<Bin> bins;
+
     public FirstFitDescending(int capacity) {
-        super(capacity);
         this.algorithmName = "ffd";
-        bins = new LinkedList<>();
+        this.binCapacity = capacity;
+        this.bins = new LinkedList<>();
     }
 
     @Override
@@ -21,6 +25,16 @@ public class FirstFitDescending extends BinPackingAlgorithm {
             var binIterator = bins.iterator();
             firstFit(integer, binIterator);
         }
+    }
+
+    @Override
+    public int getNumberOfBins(){
+        return bins.size();
+    }
+
+    @Override
+    public Collection<Bin> getPackedBins() {
+        return bins;
     }
 
     // First Fit Algorithm
