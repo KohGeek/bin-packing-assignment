@@ -13,7 +13,7 @@ import picocli.CommandLine.Spec;
 
 @Command(
     mixinStandardHelpOptions = true,
-    version = "Bin Packing Algorithm v0.0.3-SNAPSHOT",
+    version = "Bin Packing Algorithm v1.0.0",
     description = "Runs the bin-packing-algorithm"
 )
 public class Runner implements Callable<Integer> {
@@ -38,7 +38,7 @@ public class Runner implements Callable<Integer> {
 
     @Option(
         names = { "-m", "--max"},
-        description = "Specify the maximum size of randomly generated instances. Defaults to 5.",
+        description = "Specify the maximum size of randomly generated instances. Defaults to 5. Must be less than capacity.",
         defaultValue = "5"
     )
     private int maxRandom = 5;
@@ -72,6 +72,8 @@ public class Runner implements Callable<Integer> {
         // If -m is less than 1, throw an exception
         if (maxRandom < 1) {
             throw new ParameterException(cl, "Maximum random number must not be less than 1.");
+        } else if (maxRandom > capacity) {
+            throw new ParameterException(cl, "Maximum random number must not be more than bin capacity.");
         }
 
         var controller = new Controller(
