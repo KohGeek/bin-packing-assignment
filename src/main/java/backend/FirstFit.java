@@ -9,7 +9,7 @@ import java.util.Queue;
 public class FirstFit extends BinPackingAlgorithm {
 
     private Queue<Bin> bins;
-    
+
     public FirstFit(int capacity) {
         this.algorithmName = "ff";
         this.binCapacity = capacity;
@@ -26,7 +26,7 @@ public class FirstFit extends BinPackingAlgorithm {
     }
 
     @Override
-    public int getNumberOfBins(){
+    public int getNumberOfBins() {
         return bins.size();
     }
 
@@ -46,7 +46,7 @@ public class FirstFit extends BinPackingAlgorithm {
             if (!binIterator.hasNext()) {
                 bins.add(new Bin(item, binCapacity));
                 added = true;
-            } else { 
+            } else {
                 var bin = binIterator.next();
                 if (bin.checkCapacity(item) >= 0) {
                     bin.addItem(item);

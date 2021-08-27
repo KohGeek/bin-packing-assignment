@@ -7,11 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
-public class FirstFitDescending extends BinPackingAlgorithm {
+public class FirstFitDecreasing extends BinPackingAlgorithm {
 
     private Queue<Bin> bins;
 
-    public FirstFitDescending(int capacity) {
+    public FirstFitDecreasing(int capacity) {
         this.algorithmName = "ffd";
         this.binCapacity = capacity;
         this.bins = new LinkedList<>();
@@ -28,7 +28,7 @@ public class FirstFitDescending extends BinPackingAlgorithm {
     }
 
     @Override
-    public int getNumberOfBins(){
+    public int getNumberOfBins() {
         return bins.size();
     }
 
@@ -48,7 +48,7 @@ public class FirstFitDescending extends BinPackingAlgorithm {
             if (!binIterator.hasNext()) {
                 bins.add(new Bin(item, binCapacity));
                 added = true;
-            } else { 
+            } else {
                 var bin = binIterator.next();
                 if (bin.checkCapacity(item) >= 0) {
                     bin.addItem(item);

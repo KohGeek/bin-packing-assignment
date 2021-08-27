@@ -59,13 +59,13 @@ public class Controller implements Callable<Integer> {
         String name;
 
         BinPackingAlgorithm ff = new FirstFit(binCapacity);
-        BinPackingAlgorithm ffd = new FirstFitDescending(binCapacity);
+        BinPackingAlgorithm ffd = new FirstFitDecreasing(binCapacity);
 
         // if isRandomlyGenerated, then generated specified amount of random items
         if (isRandomlyGenerated) {
             for (var i = 0; i < noOfRandomItems; i++) items.add(rand.nextInt(maxRandom) + 1);
             System.out.println(items.size() + " item/s has been generated.");
-        // otherwise read from file
+            // otherwise read from file
         } else {
             items = fh.readFile(inputFile, binCapacity);
             System.out.println(inputFile.getName() + " has been read.");
@@ -82,7 +82,7 @@ public class Controller implements Callable<Integer> {
             newline++;
         }
         System.out.println();
-        
+
         // The following two modules are the same
         // 1. Pack the item list
         // 2. Get the packed bins
@@ -96,7 +96,7 @@ public class Controller implements Callable<Integer> {
         ffd.pack(items);
         bins = ffd.getPackedBins();
         name = ffd.getAlgoName() + "-" + ffd.getBinCapacity();
-        logToConsole(name, bins); 
+        logToConsole(name, bins);
         fh.writeFile(outputFileName, name, bins);
 
         System.out.println();
@@ -106,5 +106,4 @@ public class Controller implements Callable<Integer> {
 
         return 0;
     }
-
 }

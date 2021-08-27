@@ -37,7 +37,7 @@ public class Runner implements Callable<Integer> {
     private int capacity;
 
     @Option(
-        names = { "-m", "--max"},
+        names = { "-m", "--max" },
         description = "Specify the maximum size of randomly generated instances. Defaults to 5. Must be less than capacity.",
         defaultValue = "5"
     )
@@ -60,8 +60,8 @@ public class Runner implements Callable<Integer> {
         // If -r is less than 1, throw an exception
         if (isRandomlyGenerated && input.getNumberOfItems() < 1) {
             throw new ParameterException(cl, "Number of generated items must not be less than 1.");
-        // Otherwise, check for file existence
-        // The check is done here to utilise picocli built in exception handler
+            // Otherwise, check for file existence
+            // The check is done here to utilise picocli built in exception handler
         } else if (!isRandomlyGenerated) {
             file = new File(input.getInputFileName());
             if (!file.exists()) {
@@ -73,7 +73,10 @@ public class Runner implements Callable<Integer> {
         if (maxRandom < 1) {
             throw new ParameterException(cl, "Maximum random number must not be less than 1.");
         } else if (maxRandom > capacity) {
-            throw new ParameterException(cl, "Maximum random number must not be more than bin capacity.");
+            throw new ParameterException(
+                cl,
+                "Maximum random number must not be more than bin capacity."
+            );
         }
 
         var controller = new Controller(
