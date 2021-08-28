@@ -16,15 +16,15 @@ public class Test {
         Random rand;
 
         // Setup the initial parameters here
-        int binCapacity = 10;
-        int maxRandom = 8;
+        int binCapacity = 15;
+        int maxRandom = 12;
         int minRandom = 3;
-        int noOfRandomItems = 10000;
-        int repeatCount = 1000;
+        int noOfRandomItems = 5000;
+        int repeatCount = 2000;
         // End setup
 
-        int totalFFBins = 0;
-        int totalFFDBins = 0;
+        float totalFFBins = 0;
+        float totalFFDBins = 0;
 
         long startTime;
         long endTime;
@@ -41,17 +41,27 @@ public class Test {
                 rand.nextInt(maxRandom - minRandom + 1) + minRandom
             );
 
-            // Here, the order of the execution if randomised to prevent bias in execution time
+            // Here, the order of the execution is randomised to prevent bias in execution time
             if (rand.nextInt() % 2 == 0) {
                 startTime = System.nanoTime();
                 ff.pack(items);
                 endTime = System.nanoTime();
                 ffDuration += endTime - startTime;
+
+                startTime = System.nanoTime();
+                ffd.pack(items);
+                endTime = System.nanoTime();
+                ffdDuration += endTime - startTime;
             } else {
                 startTime = System.nanoTime();
                 ffd.pack(items);
                 endTime = System.nanoTime();
                 ffdDuration += endTime - startTime;
+
+                startTime = System.nanoTime();
+                ff.pack(items);
+                endTime = System.nanoTime();
+                ffDuration += endTime - startTime;
             }
 
             totalFFBins += ff.getNumberOfBins();
